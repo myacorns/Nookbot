@@ -151,28 +151,28 @@ module.exports = async (client, message) => {
 
     // Anti Mention Spam
     if (message.mentions.members && message.mentions.members.size > 10) {
-      // They mentioned more than 10 members, automute them for 10 mintues.
+      // They mentioned more than 10 members, autofreeze them for 10 mintues.
       if (message.member && level[1] < 2) {
-        // Mute
-        message.member.roles.add(client.config.mutedRole, 'Mention Spam');
+        // freeze
+        message.member.roles.add(client.config.freezedRole, 'Mention Spam');
         // Delete Message
         if (!message.deleted) {
           message.delete();
         }
-        // Schedule unmute
+        // Schedule unfreeze
         setTimeout(() => {
           try {
-            message.member.roles.remove(client.config.mutedRole, 'Unmuted after 10 mintues for Mention Spam');
+            message.member.roles.remove(client.config.freezedRole, 'Unfreezed after 10 mintues for Mention Spam');
           } catch (error) {
-            // Couldn't unmute, oh well
-            console.error('Failed to unmute after Anti Mention Spam');
+            // Couldn't unfreeze, oh well
+            console.error('Failed to unfreeze after Anti Mention Spam');
             console.error(error);
           }
         }, 600000);
         // Notify mods so they may ban if it was a raider.
         message.guild.channels.cache.get(client.config.staffChat).send(`**Mass Mention Attempt!**
   <@&495865346591293443> <@&494448231036747777>
-  The member **${message.author.tag}** just mentioned ${message.mentions.members.size} members and was automatically muted for 10 minutes!
+  The member **${message.author.tag}** just mentioned ${message.mentions.members.size} members and was automatically freezed for 10 minutes!
   They have been a member of the server for ${client.humanTimeBetween(Date.now(), message.member.joinedTimestamp)}.
   If you believe this member is a mention spammer bot, please ban them with the command:
   \`.ban ${message.author.id} Raid Mention Spammer\``);
@@ -285,13 +285,13 @@ module.exports = async (client, message) => {
   }
 
   if (message.guild && message.guild.id === client.config.modMailGuild
-    && cmd.help.name !== 'beesting'
-    && cmd.help.name !== 'beestinglog'
+    && cmd.help.name !== 'drop'
+    && cmd.help.name !== 'droplog'
     && cmd.help.name !== 'info'
     && cmd.help.name !== 'nicknames'
     && cmd.help.name !== 'usernames'
-    && cmd.help.name !== 'mute'
-    && cmd.help.name !== 'unmute'
+    && cmd.help.name !== 'freeze'
+    && cmd.help.name !== 'unfreeze'
     && cmd.help.name !== 'medicine') {
     return;
   }

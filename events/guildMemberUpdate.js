@@ -40,19 +40,19 @@ module.exports = async (client, oldMember, newMember) => {
   }
 
   if (oldMember.roles.cache.size !== newMember.roles.cache.size) {
-    const mutedRoleOld = oldMember.roles.cache.get(client.config.mutedRole);
-    const mutedRoleNew = newMember.roles.cache.get(client.config.mutedRole);
-    if ((!mutedRoleOld && !mutedRoleNew) || (mutedRoleOld && mutedRoleNew)) {
+    const freezedRoleOld = oldMember.roles.cache.get(client.config.freezedRole);
+    const freezedRoleNew = newMember.roles.cache.get(client.config.freezedRole);
+    if ((!freezedRoleOld && !freezedRoleNew) || (freezedRoleOld && freezedRoleNew)) {
       return;
     }
 
-    const memberMuted = !!(!mutedRoleOld && mutedRoleNew);
+    const memberfreezed = !!(!freezedRoleOld && freezedRoleNew);
     const embed = new Discord.MessageEmbed()
       .setAuthor(newMember.user.tag, newMember.user.displayAvatarURL())
       .setTimestamp()
-      .setColor(memberMuted ? '#ff9292' : '#1de9b6')
+      .setColor(memberfreezed ? '#ff9292' : '#1de9b6')
       .setFooter(`ID: ${newMember.id}`)
-      .addField(`**Member ${memberMuted ? 'Muted' : 'Unmuted'}**`, `<@${newMember.id}>`);
+      .addField(`**Member ${memberfreezed ? 'freezed' : 'Unfreezed'}**`, `<@${newMember.id}>`);
 
     oldMember.guild.channels.cache.get(client.config.modLog).send(embed);
   }

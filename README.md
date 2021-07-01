@@ -1,2 +1,2 @@
 # Wave
-Discord.js bot for a personal server using Nookbot (ACNH bot) base
+Discord.js bot for a personal server using Waveboat (ACNH bot) base

@@ -20,7 +20,7 @@ module.exports.run = async (client, message, args, level, Discord) => {
   const newPoints = parseInt(args[1], 10);
 
   if (!(newPoints >= 0)) {
-    return client.error(message.channel, 'Invalid Number!', 'Please provide a valid number for the stings to give!');
+    return client.error(message.channel, 'Invalid Number!', 'Please provide a valid number for the drops to give!');
   }
 
   const noDelete = !!(args[2] === 'nodelete' || args[2] === 'nd');
@@ -37,62 +37,62 @@ module.exports.run = async (client, message, args, level, Discord) => {
 
   let dmMsg;
   let action;
-  let mute = 0;
+  let freeze = 0;
   let ban = false;
   if (newPoints === 0) {
     // Make a note
     action = 'Note';
   } else if (newPoints + curPoints >= 25) {
     // Ban
-    dmMsg = `You have been banned from the AC:NH server for the following reason:
+    dmMsg = `You have been banned from the Ocean for the following reason:
 **${reason}**
-You were given **${newPoints} bee sting${newPoints === 1 ? '' : 's'}** and your total is **${newPoints + curPoints}**.
+You were given **${newPoints} drop${newPoints === 1 ? '' : 's'}** and your total is **${newPoints + curPoints}**.
 If you wish to appeal your ban, fill out this Google Form:
 ${client.config.banAppealLink}`;
     action = 'Ban';
     ban = true;
   } else if (curPoints < 20 && newPoints + curPoints >= 20) {
-    // Mute 12 hours
-    dmMsg = `You have been temporarily muted and will be unable to see any trade channels for 12 hours in the AC:NH server for the following reason:
+    // freeze 12 hours
+    dmMsg = `You have been temporarily freezed and will be unable to see any trade channels for 12 hours in the AC:NH server for the following reason:
 **${reason}**
-You were given **${newPoints} bee sting${newPoints === 1 ? '' : 's'}** and your total is **${newPoints + curPoints}**.
+You were given **${newPoints} drop${newPoints === 1 ? '' : 's'}** and your total is **${newPoints + curPoints}**.
 If you previously had the Trade or Voice roles, you will need to reread the rules and rereact to the verification prompt to obtain them again.
-For more information about why you were muted, please read #rules-you-must-read (<#696239787467604008>).`;
-    action = '12 Hour Mute';
-    mute = 720;
+For more information about why you were freezed, please read #rules-you-must-read (<#696239787467604008>).`;
+    action = '12 Hour freeze';
+    freeze = 720;
   } else if (curPoints < 15 && newPoints + curPoints >= 15) {
-    // Mute 1 hour
-    dmMsg = `You have been temporarily muted and will be unable to see any trade channels for 1 hour in the AC:NH server for the following reason:
+    // freeze 1 hour
+    dmMsg = `You have been temporarily freezed and will be unable to see any trade channels for 1 hour in the AC:NH server for the following reason:
 **${reason}**
-You were given **${newPoints} bee sting${newPoints === 1 ? '' : 's'}** and your total is **${newPoints + curPoints}**.
+You were given **${newPoints} drop${newPoints === 1 ? '' : 's'}** and your total is **${newPoints + curPoints}**.
 If you previously had the Trade or Voice roles, you will need to reread the rules and rereact to the verification prompt to obtain them again.
-For more information about why you were muted, please read #rules-you-must-read (<#696239787467604008>).`;
-    action = '1 Hour Mute';
-    mute = 60;
+For more information about why you were freezed, please read #rules-you-must-read (<#696239787467604008>).`;
+    action = '1 Hour freeze';
+    freeze = 60;
   } else if (curPoints < 10 && newPoints + curPoints >= 10) {
-    // Mute 30 minutes
-    dmMsg = `You have been temporarily muted and will be unable to see any trade channels for 30 minutes in the AC:NH server for the following reason:
+    // freeze 30 minutes
+    dmMsg = `You have been temporarily freezed and will be unable to see any trade channels for 30 minutes in the AC:NH server for the following reason:
 **${reason}**
-You were given **${newPoints} bee sting${newPoints === 1 ? '' : 's'}** and your total is **${newPoints + curPoints}**.
+You were given **${newPoints} drop${newPoints === 1 ? '' : 's'}** and your total is **${newPoints + curPoints}**.
 If you previously had the Trade or Voice roles, you will need to reread the rules and rereact to the verification prompt to obtain them again.
-For more information about why you were muted, please read #rules-you-must-read (<#696239787467604008>).`;
-    action = '30 Minute Mute';
-    mute = 30;
+For more information about why you were freezed, please read #rules-you-must-read (<#696239787467604008>).`;
+    action = '30 Minute freeze';
+    freeze = 30;
   } else if (curPoints < 5 && newPoints + curPoints >= 5) {
-    // Mute 10 minutes
-    dmMsg = `You have been temporarily muted and will be unable to see any trade channels for 10 minutes in the AC:NH server for the following reason:
+    // freeze 10 minutes
+    dmMsg = `You have been temporarily freezed and will be unable to see any trade channels for 10 minutes in the AC:NH server for the following reason:
 **${reason}**
-You were given **${newPoints} bee sting${newPoints === 1 ? '' : 's'}** and your total is **${newPoints + curPoints}**.
+You were given **${newPoints} drop${newPoints === 1 ? '' : 's'}** and your total is **${newPoints + curPoints}**.
 If you previously had the Trade or Voice roles, you will need to reread the rules and rereact to the verification prompt to obtain them again.
-For more information about why you were muted, please read #rules-you-must-read (<#696239787467604008>).`;
-    action = '10 Minute Mute';
-    mute = 10;
+For more information about why you were freezed, please read #rules-you-must-read (<#696239787467604008>).`;
+    action = '10 Minute freeze';
+    freeze = 10;
   } else {
     // Give warning
     dmMsg = `You have been warned in the AC:NH server for the following reason:
 **${reason}**
-You were given **${newPoints} bee sting${newPoints === 1 ? '' : 's'}** and your total is **${newPoints + curPoints}**.
-Don't worry, 1 sting is just a warning and will expire in **1 week**.
+You were given **${newPoints} drop${newPoints === 1 ? '' : 's'}** and your total is **${newPoints + curPoints}**.
+Don't worry, 1 drop is just a warning and will expire in **1 week**.
 For more information about why you were warned, please read #rules-you-must-read (<#696239787467604008>).`;
     action = 'Warn';
   }
@@ -126,49 +126,49 @@ For more information about why you were warned, please read #rules-you-must-read
 
   // Perform the required action
   if (ban) {
-    await client.guilds.cache.get(client.config.mainGuild).members.ban(member, { reason: '[Auto] Beestings', days: noDelete ? 0 : 1 }).catch((err) => {
+    await client.guilds.cache.get(client.config.mainGuild).members.ban(member, { reason: '[Auto] drops', days: noDelete ? 0 : 1 }).catch((err) => {
       client.error(client.channels.cache.get(client.config.modLog), 'Ban Failed!', `I've failed to ban this member! ${err}`);
     });
-  } else if (mute) {
+  } else if (freeze) {
     try {
-      // Update unmuteTime on userDB
-      client.muteDB.set(member.id, (mute * 60000) + time);
+      // Update unfreezeTime on userDB
+      client.freezeDB.set(member.id, (freeze * 60000) + time);
       const guildMember = await client.guilds.cache.get(client.config.mainGuild).members.fetch(member);
-      const mutedMember = await guildMember.roles.add(client.config.mutedRole, '[Auto] Beestings');
-      await mutedMember.roles.remove([client.config.tradeRole, client.config.voiceRole], '[Auto] Beestings');
+      const freezedMember = await guildMember.roles.add(client.config.freezedRole, '[Auto] drops');
+      await freezedMember.roles.remove([client.config.tradeRole, client.config.voiceRole], '[Auto] drops');
 
       // Kick member from voice
       if (guildMember.voice.channel) {
         guildMember.voice.kick();
       }
 
-      // Schedule unmute
+      // Schedule unfreeze
       setTimeout(() => {
-        if ((client.muteDB.get(member.id) || 0) < Date.now()) {
-          client.muteDB.delete(member.id);
-          mutedMember.roles.remove(client.config.mutedRole, `Scheduled unmute after ${mute} minutes.`).catch((err) => {
-            client.error(client.channels.cache.get(client.config.modLog), 'Unmute Failed!', `I've failed to unmute this member! ${err}\nID: ${member.id}`);
+        if ((client.freezeDB.get(member.id) || 0) < Date.now()) {
+          client.freezeDB.delete(member.id);
+          freezedMember.roles.remove(client.config.freezedRole, `Scheduled unfreeze after ${freeze} minutes.`).catch((err) => {
+            client.error(client.channels.cache.get(client.config.modLog), 'Unfreeze Failed!', `I've failed to unfreeze this member! ${err}\nID: ${member.id}`);
           });
         }
-      }, mute * 60000);
+      }, freeze * 60000);
     } catch (err) {
-      client.error(client.channels.cache.get(client.config.modLog), 'Mute Failed!', `I've failed to mute this member! ${err}`);
+      client.error(client.channels.cache.get(client.config.modLog), 'freeze Failed!', `I've failed to freeze this member! ${err}`);
     }
   }
 
   // Notify in channel
-  client.success(message.channel, 'Bee Sting Given!', `**${member.guild ? member.user.tag : member.tag || member}** was given **${newPoints}** bee sting${newPoints === 1 ? '' : 's'}!`);
+  client.success(message.channel, 'drop Given!', `**${member.guild ? member.user.tag : member.tag || member}** was given **${newPoints}** drop${newPoints === 1 ? '' : 's'}!`);
 
   // Send mod-log embed
   const embed = new Discord.MessageEmbed()
     .setAuthor(`Case ${caseNum} | ${action} | ${member.guild ? member.user.tag : member.tag || member}`, member.guild ? member.user.displayAvatarURL() : member.displayAvatarURL())
-    .setColor((mute || ban) ? '#ff9292' : '#fada5e')
+    .setColor((freeze || ban) ? '#ff9292' : '#fada5e')
     .setDescription(`Reason: ${reason}`)
     .addField('User', `<@${member.id}>`, true)
     .addField('Moderator', `<@${message.author.id}>`, true)
-    .addField('Stings Given', newPoints, true)
+    .addField('drops Given', newPoints, true)
     .addField('DM Sent?', dmSent ? `${client.emoji.checkMark} Yes` : `${client.emoji.redX} No`, true)
-    .addField('Total Stings', curPoints + newPoints, true)
+    .addField('Total drops', curPoints + newPoints, true)
     .setFooter(`ID: ${member.id}`)
     .setTimestamp();
   return client.channels.cache.get(client.config.modLog).send(embed);
@@ -176,15 +176,15 @@ For more information about why you were warned, please read #rules-you-must-read
 
 module.exports.conf = {
   guildOnly: true,
-  aliases: ['bee', 'bs', 'sting'],
+  aliases: ['d', 'drop', 'droplet'],
   permLevel: 'Redd',
   args: 2,
 };
 
 module.exports.help = {
-  name: 'beesting',
+  name: 'droplet',
   category: 'moderation',
-  description: 'Manage bee stings on server members.',
-  usage: 'beesting <@member> <stings> <reason>',
-  details: '<@member> The member to give a bee sting.\n<stings> => The number of stings to give the member.\n<reason> => The reason for giving the member the bee sting.',
+  description: 'Manage drops on server members.',
+  usage: 'droplet <@member> <drops> <reason>',
+  details: '<@member> The member to give a droplet.\n<drop> => The number of drops to give the member.\n<reason> => The reason for giving the member the drop.',
 };

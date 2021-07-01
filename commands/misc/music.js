@@ -64,7 +64,7 @@ module.exports.run = async (client, message, args, level, Discord) => {
   const updateInfo = async (updateTitle, updateDesc) => {
     // Prepare the embed
     const embed = new Discord.MessageEmbed()
-      .setTitle('__**•• DJ Nookbot ••**__')
+      .setTitle('__**•• DJ Waveboat ••**__')
       .setDescription(`Played: ${client.songQueue.played} song${client.songQueue.played !== 1 ? 's' : ''} | Total Time: ${client.humanTimeBetween(0, client.songQueue.timePlayed * 1000) || '0 seconds'}
 Playing: ${client.songQueue.playing ? client.emoji.checkMark : client.emoji.redX} | Shuffle Mode: ${client.songQueue.shuffle ? client.emoji.checkMark : client.emoji.redX}`)
       .setColor('#1de9b6')

@@ -14,9 +14,9 @@ module.exports.run = async (client, message, args, level) => { // eslint-disable
   }
 
   // Removes the role from the member
-  member.roles.remove(client.config.mutedRole)
-    .then(() => client.success(message.channel, 'Success!', `${message.author}, I've successfully unmuted ${member}!`))
-    .catch((err) => client.error(message.channel, 'Error!', `Failed to unmute member! Error: ${err}`));
+  member.roles.remove(client.config.freezedRole)
+    .then(() => client.success(message.channel, 'Success!', `${message.author}, I've successfully unfreezed ${member}!`))
+    .catch((err) => client.error(message.channel, 'Error!', `Failed to unfreeze member! Error: ${err}`));
 };
 
 module.exports.conf = {
@@ -27,9 +27,9 @@ module.exports.conf = {
 };
 
 module.exports.help = {
-  name: 'unmute',
+  name: 'unfreeze',
   category: 'moderation',
-  description: 'Removes the mentioned user the Muted role',
-  usage: 'unmute <@user>',
+  description: 'Removes the mentioned user the freezed role',
+  usage: 'unfreeze <@user>',
   details: '<@user> => Any valid member of the server',
 };

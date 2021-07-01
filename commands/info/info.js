@@ -9,7 +9,7 @@ module.exports.run = async (client, message, args, level, Discord) => {
     .setAuthor(message.author.tag, message.author.displayAvatarURL())
     .setColor('#4199c2')
     .setTimestamp()
-    .setFooter('Nookbot', client.user.displayAvatarURL());
+    .setFooter('Waveboat', client.user.displayAvatarURL());
 
   switch (args[0]) {
     case 'bot': {

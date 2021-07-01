@@ -84,7 +84,7 @@ module.exports.run = async (client, message, args, level, Discord) => {
 
       // Check if a tag name was given
       if (args.length === 1) {
-        client.error(message.channel, 'No Tag Name!', 'Make sure you include an existing tag name and the content to edit the tag with!');
+        client.error(message.channel, 'No Tag Name!', 'Make sure you include an exidrop tag name and the content to edit the tag with!');
         return;
       }
 
@@ -160,5 +160,5 @@ module.exports.help = {
   category: 'misc',
   description: 'Get, create, or list tags',
   usage: 'tag <create|edit|delete> <tag name> <content>',
-  details: '<create|edit|delete> => Whether to create a new tag or edit/delete an existing one.\n<tag name> => The name of the tag you want to create/edit/delete.\n<content> => The content for the tag you want to create or edit.',
+  details: '<create|edit|delete> => Whether to create a new tag or edit/delete an exidrop one.\n<tag name> => The name of the tag you want to create/edit/delete.\n<content> => The content for the tag you want to create or edit.',
 };

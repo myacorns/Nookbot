@@ -56,27 +56,27 @@ module.exports = (client) => {
         }
       });
 
-      // Reschedule any unmutes from muteDB
+      // Reschedule any unfreezes from freezeDB
       const now = Date.now();
-      client.muteDB.keyArray().forEach((memID) => {
-        const unmuteTime = client.muteDB.get(memID);
+      client.freezeDB.keyArray().forEach((memID) => {
+        const unfreezeTime = client.freezeDB.get(memID);
         mainGuild.members.fetch(memID).then((member) => {
-          if (unmuteTime < now) {
-            // Immediately unmute
-            client.muteDB.delete(memID);
-            member.roles.remove(client.config.mutedRole, 'Scheduled unmute through reboot.');
+          if (unfreezeTime < now) {
+            // Immediately unfreeze
+            client.freezeDB.delete(memID);
+            member.roles.remove(client.config.freezedRole, 'Scheduled unfreeze through reboot.');
           } else {
-            // Schedule unmute
+            // Schedule unfreeze
             setTimeout(() => {
-              if ((client.muteDB.get(memID) || 0) < Date.now()) {
-                client.muteDB.delete(memID);
-                member.roles.remove(client.config.mutedRole, 'Scheduled unmute through reboot.');
+              if ((client.freezeDB.get(memID) || 0) < Date.now()) {
+                client.freezeDB.delete(memID);
+                member.roles.remove(client.config.freezedRole, 'Scheduled unfreeze through reboot.');
               }
-            }, unmuteTime - now);
+            }, unfreezeTime - now);
           }
         }).catch(() => {
-          // Probably no longer a member, don't schedule their unmute and remove entry from DB.
-          client.muteDB.delete(memID);
+          // Probably no longer a member, don't schedule their unfreeze and remove entry from DB.
+          client.freezeDB.delete(memID);
         });
       });
 

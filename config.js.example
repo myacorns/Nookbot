@@ -23,7 +23,7 @@ const config = {
   // Settings
   prefix: '.',
   verifiedRole: 'roleID',
-  mutedRole: 'roleID',
+  freezedRole: 'roleID',
   tradeRole: 'roleID',
   voiceRole: 'roleID',
   copperBookerRole: 'roleID',

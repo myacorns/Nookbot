@@ -97,5 +97,5 @@ module.exports.help = {
   category: 'game',
   description: 'Switch friend code management',
   usage: 'friendcode <set|del> <code|@member>',
-  details: "<set|del> => Whether to set a new friend code or delete an existing one.\n<code|@member> => Only necessary if you're setting a new code or getting the code of another member.",
+  details: "<set|del> => Whether to set a new friend code or delete an exidrop one.\n<code|@member> => Only necessary if you're setting a new code or getting the code of another member.",
 };

@@ -26,7 +26,7 @@ module.exports.run = async (client, message, args, level) => {
   }
 
   const { infractions } = client.userDB.ensure(member.id, client.config.userDBDefaults);
-  let msg = `__**${member.guild ? member.user.tag : `${member.username}#${member.discriminator}`}'s Bee Stings**__`;
+  let msg = `__**${member.guild ? member.user.tag : `${member.username}#${member.discriminator}`}'s drops**__`;
   let expPoints = 0;
   let expMsg = '';
   let curPoints = 0;
@@ -48,24 +48,24 @@ module.exports.run = async (client, message, args, level) => {
   }
 
   infractions.forEach((i) => {
-    // Only allow mods to see zero point stings, called notes, on a user
+    // Only allow mods to see zero point drops, called notes, on a user
     if (i.points > 0 || level >= 2) {
       const moderator = client.users.cache.get(i.moderator);
       if ((i.points * 604800000) + i.date > time) {
         curPoints += i.points;
-        curMsg += `\n• Case ${i.case} -${level >= 2 ? ` ${moderator ? `Mod: ${moderator.tag}` : `Unknown Mod ID: ${i.moderator || 'No ID Stored'}`} -` : ''} (${moment.utc(i.date).add(offset, 'hours').format(`DD MMM YYYY ${timeToUse === '12h' ? 'hh:mm:ss a' : 'HH:mm:ss'}`)} ${tz}) ${i.points} bee sting${i.points === 1 ? '' : 's'}\n> Reason: ${i.reason}`;
+        curMsg += `\n• Case ${i.case} -${level >= 2 ? ` ${moderator ? `Mod: ${moderator.tag}` : `Unknown Mod ID: ${i.moderator || 'No ID Stored'}`} -` : ''} (${moment.utc(i.date).add(offset, 'hours').format(`DD MMM YYYY ${timeToUse === '12h' ? 'hh:mm:ss a' : 'HH:mm:ss'}`)} ${tz}) ${i.points} drop${i.points === 1 ? '' : 's'}\n> Reason: ${i.reason}`;
       } else {
         expPoints += i.points;
-        expMsg += `\n• Case ${i.case} -${level >= 2 ? ` ${moderator ? `Mod: ${moderator.tag}` : `Unknown Mod ID: ${i.moderator || 'No ID Stored'}`} -` : ''} (${moment.utc(i.date).add(offset, 'hours').format(`DD MMM YYYY ${timeToUse === '12h' ? 'hh:mm:ss a' : 'HH:mm:ss'}`)} ${tz}) ${i.points} bee sting${i.points === 1 ? '' : 's'}\n> Reason: ${i.reason}`;
+        expMsg += `\n• Case ${i.case} -${level >= 2 ? ` ${moderator ? `Mod: ${moderator.tag}` : `Unknown Mod ID: ${i.moderator || 'No ID Stored'}`} -` : ''} (${moment.utc(i.date).add(offset, 'hours').format(`DD MMM YYYY ${timeToUse === '12h' ? 'hh:mm:ss a' : 'HH:mm:ss'}`)} ${tz}) ${i.points} drop${i.points === 1 ? '' : 's'}\n> Reason: ${i.reason}`;
       }
     }
   });
 
   if (curMsg) {
-    msg += `\n**Current bee stings (${curPoints} total):**${curMsg}`;
+    msg += `\n**Current drops (${curPoints} total):**${curMsg}`;
   }
   if (expMsg) {
-    msg += `\n**Expired bee stings (${expPoints} total):**${expMsg}`;
+    msg += `\n**Expired drops (${expPoints} total):**${expMsg}`;
   }
 
   // Where to send message
@@ -74,7 +74,7 @@ module.exports.run = async (client, message, args, level) => {
       return message.channel.send(msg, { split: true });
     }
     // No infractions
-    return message.channel.send(`${member.guild ? member.user.tag : `${member.username}#${member.discriminator}`} doesn't have any bee stings!`);
+    return message.channel.send(`${member.guild ? member.user.tag : `${member.username}#${member.discriminator}`} doesn't have any drops!`);
   }
   // Try to send DM
   try {
@@ -82,7 +82,7 @@ module.exports.run = async (client, message, args, level) => {
     if (curMsg || expMsg) {
       await dmChannel.send(msg, { split: true });
     } else {
-      await dmChannel.send('You do not have any bee stings!');
+      await dmChannel.send('You do not have any drops!');
     }
     if (message.channel.type !== 'dm') {
       return message.channel.send("I've sent you a DM!");
@@ -90,24 +90,24 @@ module.exports.run = async (client, message, args, level) => {
   } catch (e) {
     // Send basic version in channel
     if (curMsg || expMsg) {
-      return message.channel.send(`I was unable to send a detailed list of your bee stings to your direct messages, so here is some basic info:
-**Current bee stings**: ${curPoints} sting${curPoints === 1 ? '' : 's'}
-**Expired bee stings**: ${expPoints} sting${expPoints === 1 ? '' : 's'}`);
+      return message.channel.send(`I was unable to send a detailed list of your drops to your direct messages, so here is some basic info:
+**Current drops**: ${curPoints} drop${curPoints === 1 ? '' : 's'}
+**Expired drops**: ${expPoints} drop${expPoints === 1 ? '' : 's'}`);
     }
-    return message.channel.send('You do not have any bee stings!');
+    return message.channel.send('You do not have any drops!');
   }
 };
 
 module.exports.conf = {
   guildOnly: false,
-  aliases: ['beelog', 'bslog', 'stinglog', 'bl'],
+  aliases: ['dl', 'droplog', 'dropslog', 'dropletlog'],
   permLevel: 'User',
 };
 
 module.exports.help = {
-  name: 'beestinglog',
+  name: 'droplog',
   category: 'moderation',
-  description: 'Shows a list of bee stings given to a member',
-  usage: 'beestinglog <@member> <timezone> <time to use>',
-  details: '<@member> => The member to list bee stings for.\n<timezone> => The timezone used to display the time stings were issued. Defaults to UTC.\n<time to use> => 12 or 24. Whether to use 12 or 24 hour time. Defaults to 24.',
+  description: 'Shows a list of drops given to a member',
+  usage: 'droplog <@member> <timezone> <time to use>',
+  details: '<@member> => The member to list drops for.\n<timezone> => The timezone used to display the time drops were issued. Defaults to UTC.\n<time to use> => 12 or 24. Whether to use 12 or 24 hour time. Defaults to 24.',
 };

@@ -45,7 +45,7 @@ module.exports.run = (client, message, args) => {
         }
       }, 60000);
     }).catch((error) => {
-      client.error(message.channel, 'Failed to Create a Session!', `Nookbot failed to create a session for the following reason: ${error}`);
+      client.error(message.channel, 'Failed to Create a Session!', `Waveboat failed to create a session for the following reason: ${error}`);
     });
   } else {
     // Too many channels in the server, Discord max is 500, I choose 300 since we do not need a ton of sessions clogging things up

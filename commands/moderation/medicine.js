@@ -15,7 +15,7 @@ module.exports.run = async (client, message, args) => {
     client.userDB.set(userID, infs.filter((inf) => inf.case !== caseNum), 'infractions');
     // Notify that the infraction was removed
     const user = await client.users.fetch(userID);
-    return client.success(message.channel, 'Medicine Applied!', `**${user.tag}** was given medicine to cure **${infRemoved.points}** bee sting${infRemoved.points === 1 ? '' : 's'} from case number **${caseNum}**!`);
+    return client.success(message.channel, 'Medicine Applied!', `**${user.tag}** was given medicine to cure **${infRemoved.points}** drop${infRemoved.points === 1 ? '' : 's'} from case number **${caseNum}**!`);
   }
 
   return client.error(message.channel, 'Invalid Case Number!', 'Please provide a valid case number to apply medicine to!');
@@ -23,7 +23,7 @@ module.exports.run = async (client, message, args) => {
 
 module.exports.conf = {
   guildOnly: true,
-  aliases: ['beestingdel', 'beedel', 'bsdel', 'stingdel', 'med', 'cure'],
+  aliases: ['dropdel', 'beedel', 'bsdel', 'dropdel', 'med', 'cure'],
   permLevel: 'Head Redd',
   args: 1,
 };
@@ -31,7 +31,7 @@ module.exports.conf = {
 module.exports.help = {
   name: 'medicine',
   category: 'moderation',
-  description: 'Remove bee stings on server members.',
+  description: 'Remove drops on server members.',
   usage: 'Medicine <case number>',
-  details: '<case number> => The case number for the sting to be removed.',
+  details: '<case number> => The case number for the drop to be removed.',
 };

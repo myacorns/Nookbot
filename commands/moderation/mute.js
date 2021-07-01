@@ -20,13 +20,13 @@ module.exports.run = async (client, message, args, level) => {
 
   try {
   // Adds the role to the member and removes the trade and voice roles
-    const mutedMember = await member.roles.add(client.config.mutedRole);
-    await mutedMember.roles.remove([client.config.tradeRole, client.config.voiceRole]);
+    const freezedMember = await member.roles.add(client.config.freezedRole);
+    await freezedMember.roles.remove([client.config.tradeRole, client.config.voiceRole]);
   } catch (e) {
-    return client.error(message.channel, 'Error!', `Failed to mute member! Error: ${e}`);
+    return client.error(message.channel, 'Error!', `Failed to freeze member! Error: ${e}`);
   }
 
-  return client.success(message.channel, 'Success!', `${message.author}, I've successfully muted ${member}!`);
+  return client.success(message.channel, 'Success!', `${message.author}, I've successfully freezed ${member}!`);
 };
 
 module.exports.conf = {
@@ -37,9 +37,9 @@ module.exports.conf = {
 };
 
 module.exports.help = {
-  name: 'mute',
+  name: 'freeze',
   category: 'moderation',
-  description: 'Gives the mentioned user the Muted role',
-  usage: 'mute <@user>',
+  description: 'Gives the mentioned user the freezed role',
+  usage: 'freeze <@user>',
   details: '<@user> => Any valid member of the server',
 };
