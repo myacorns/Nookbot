@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 const config = {
-  token: '',
+  token: 'ODYwMjY0Nzg4Nzg5NDI4MjM0.YN4uBA.VxhD2T4SD82k6D79ChESVXmx3lU',
 
   // Twitter
   twitterAPIKey: '',
@@ -93,7 +93,7 @@ const config = {
   },
 
   // Bot Perms and Stuff
-  ownerID: 'userID',
+  ownerID: '267843760124067851',
 
   admins: ['userID'],
 
