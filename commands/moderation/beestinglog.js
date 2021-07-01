@@ -105,7 +105,7 @@ module.exports.conf = {
 };
 
 module.exports.help = {
-  name: 'droplog',
+  name: 'dropletlog',
   category: 'moderation',
   description: 'Shows a list of drops given to a member',
   usage: 'droplog <@member> <timezone> <time to use>',
