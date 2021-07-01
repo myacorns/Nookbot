@@ -150,7 +150,7 @@ client.bannedWordsFilter = new Searcher(bannedWordsArray, {
   keySelector: (s) => s.word, threshold: 1, returnMatchData: true, useSellers: false, ignoreSymbols: false,
 });
 
-client.login(config.token).then(() => {
+client.login(process_env_token).then(() => {
   console.log('Bot successfully logged in.');
 }).catch(() => {
   console.log('Retrying client.login()...');
