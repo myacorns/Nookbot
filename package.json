@@ -1,6 +1,7 @@
 {
     "name": "Waveboat",
     "version": "1.0.0",
+    "engines": { "node": "14.17.2" },
     "description": "",
     "main": "index.js",
     "scripts": {
@@ -37,7 +38,7 @@
         "string-similarity": "^3.0.0",
         "twitter-lite": "^0.9.4",
         "ytdl-core": "^2.0.1",
-        "ytdl-core-discord": "^1.1.0"
+        "ytdl-core-discord": "^1.1.0",
     },
     "devDependencies": {
         "eslint": "^6.7.2",
