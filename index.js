@@ -1,6 +1,8 @@
 /* eslint-disable consistent-return */
 /* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
+require('dotenv')
+
 const Discord = require('discord.js');
 const Enmap = require('enmap');
 const fs = require('fs');
