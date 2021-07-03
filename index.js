@@ -154,7 +154,8 @@ client.bannedWordsFilter = new Searcher(bannedWordsArray, {
 
 client.login(process.env_token).then(() => {
   console.log('Bot successfully logged in.');
-}).catch(() => {
+}).catch((e) => {
+  console.log(e);
   console.log('Retrying client.login()...');
   let counter = 1;
   const interval = setInterval(() => {
